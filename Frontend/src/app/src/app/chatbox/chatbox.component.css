@@ -1,0 +1,173 @@
+*/
+#body {
+  overflow: hidden;
+  overflow-x: hidden;
+  margin: 0;
+  width:400px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  width: 5px;
+  background: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 1em;
+  background-color: #ddd;
+  outline: 1px solid slategrey;
+  border-radius: 1rem;
+}
+#chatter{
+  overflow-y: scroll;
+     
+  display: flex;
+  flex-direction: column-reverse;
+  height: 370px;
+}
+.text-small {
+  font-size: 0.9rem;
+}
+
+.messages-box,
+.chat-box {
+  
+  height: 480px;
+ 
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+input::placeholder {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+
+.userMsg{
+  background-color:#57a193 ;
+  width: fit-content;
+  max-width: 60%;
+  color: white;
+  
+}
+.receiverMsg{
+  background-color: gray;
+  color:white;
+  width: fit-content;
+  max-width: 60%;
+ 
+}
+ .user{
+  color: #333;
+  width: 50%;
+  
+  
+}
+/*.reciever{
+  width: fit-content;
+    color: #999;
+   
+} */
+
+.navbar{
+  position: fixed;
+  background-color: honeydew;
+  width: 57%;
+  margin-left: -1.8%;
+  top: 0px;
+ 
+}
+
+.topnav a {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+  
+  .topnav.responsive {position: absolute; float: right;margin-bottom: 5px;}
+  .topnav.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Add an active class to highlight the current page */
+  .topnav a.active {
+    background-color:#49aa86; ;
+    color: white;
+  }
+  .topnav {
+    background-color: #333;
+    overflow: hidden;
+    
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: right;
+    display: none;
+    color: #999999;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    
+  }
+  #copy{
+    color: rgb(180, 179, 179);
+  }
+  #copy:hover{
+    color: white;
+  }
+  #paste{
+    font-size: x-large;
+    color: rgb(180, 179, 179);
+    margin-top: 3%;
+    margin-left: 3%;
+  }
+  #paste:hover{
+    color: black;
+    
+    
+  }
+  #profile:hover{
+    cursor: pointer;
+  }
+  #image{
+    color: #999;
+  }
+  #image:hover{
+    cursor: pointer;
+    color: black;
+  }
+  input[type=file]{
+    display: none;
+  }
+  .imgreciever{
+    max-height:300px;
+    max-width: 280px;
+    border: 5px solid grey;
+  }
+  .imguser{
+   display: flex;
+  align-self: flex-end;
+    max-height:300px;
+    max-width: 280px;
+    border: 5px solid #57a193;
+    
+  }
