@@ -1,0 +1,94 @@
+<div class="Signup">
+    
+
+    <section class="signup">
+        <!-- <img src="images/signup-bg.jpg" alt=""> -->
+        <div class="container">
+            <div class="signup-content">
+                <form (ngSubmit)="addUser()" [formGroup]="registerForm" id="signup-form" class="signup-form">
+                    <h2 class="form-title">Create account</h2>
+                    <div class="form-group">
+                        <input type="text" class="form-input"  id="name" formControlName="name" placeholder="Your Name"/>
+                    
+                    <small class="text-danger"
+                        *ngIf="registerForm.get('name')!.hasError('required') && registerForm.get('name')!.touched">
+                        Please provide your name!
+                    </small >
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-input" (keyup)="checkUsername($event)"  formControlName="username"  id="username" placeholder="User Name"/>
+                        <small class="text-danger">
+                        {{error}}
+                    </small >
+                    <small class="text-danger"
+                        *ngIf="registerForm.get('username')!.hasError('required') && registerForm.get('username')!.touched">
+                        Please provide a username!
+                    </small >
+                    <small class="text-danger"
+                        *ngIf="registerForm.get('username')!.hasError('minlength') && registerForm.get('username')!.touched">
+                        Username should be of minimum length 8!
+                    </small >
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input"   id="email" formControlName="email" [class.invalid]="registerForm.get('email')!.invalid && registerForm.get('email')!.touched" placeholder="Your Email"/>
+                        <small class="text-danger"
+                        *ngIf="registerForm.get('email')!.hasError('required') && registerForm.get('email')!.touched">
+                        Please provide your email!
+                    </small>
+                    <small class="text-danger"
+                        *ngIf="registerForm.get('email')!.hasError('pattern') && registerForm.get('email')!.touched">
+                        Give a valid email id!
+                    </small>
+
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-input"  id="password" formControlName="pwd" placeholder="Password"/>
+                        <small class="text-danger"
+                        *ngIf="registerForm.get('pwd')!.hasError('pattern') && registerForm.get('pwd')!.touched">
+                        Password must contain a capital letter, a small letter,a number and a special character
+                    </small >
+                    <small class="text-danger"
+                    *ngIf="registerForm.get('pwd')!.hasError('required') && registerForm.get('pwd')!.touched">
+                    Please provide a strong password!
+                    </small>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-input" name="re_password" formControlName="repwd" id="re_password" placeholder="Repeat your password"/>
+                    </div>
+                    <small class="text-danger"
+                        *ngIf="registerForm.get('repwd')!.hasError('required') && registerForm.get('repwd')!.touched">
+                       Please confirm your password! 
+                    </small >
+                    <small class="text-danger"
+                    *ngIf="(registerForm.get('repwd')!.value!=registerForm.get('pwd')!.value) && registerForm.get('repwd')!.touched">
+                   Password doesn't match!!
+                </small >
+                    <div class="form-group">
+                        <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                        <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" [disabled]="registerForm.invalid || (registerForm.get('repwd')!.value!=registerForm.get('pwd')!.value) || error" id="submit" class="form-submit" value="Sign up"/>
+                    </div>
+                </form>
+                <p class="loginhere">
+                    Have already an account ? <a routerLink="/login" class="loginhere-link">Login here</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+<script>
+const togglePassword = document.querySelector('#togglePassword');
+const password = document.querySelector('#password');
+togglePassword.addEventListener('click', function (e) {
+// toggle the type attribute
+const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+password.setAttribute('type', type);
+// toggle the eye / eye slash icon
+this.classList.toggle('bi-eye');
+});
+</script>

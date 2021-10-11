@@ -1,0 +1,12 @@
+<form >
+    <div class="col-md-12">
+       <input type="email" name="fname" id="username" style="margin-top: 15%; margin-left: 30%;"  placeholder="email" [(ngModel)]='email'/>
+       </div>
+       <small class="text-danger" style="margin-left: 40%;" *ngIf='error'><b>{{error}}</b></small>
+   <div >
+
+   <button type="submit" (click)='sendMail()' >Submit</button>
+   
+   </div>
+   
+   </form>

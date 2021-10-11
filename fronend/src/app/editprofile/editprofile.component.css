@@ -1,0 +1,53 @@
+.img{
+    width: 20px;
+    height:10px;
+  }
+  input[type="file"]{
+    display: none;
+       }
+       #photo{
+        background-color:#aa9b13;
+        margin-top: 2%;
+        width: 150px;
+        height: 50px;
+        border-radius: 1em;
+        display: flex;
+       justify-content: center;
+       align-items: center;
+       color: black;
+       left: 30%;
+       cursor: pointer;
+      }
+      #photo:hover{
+        color: grey;
+      }
+
+      .Image{
+          margin-top: 10%;
+      }
+      #username{
+        width: 40%; 
+        height: 40px; 
+        
+        border: 1px solid grey;
+      }
+      input[type='text']::placeholder{
+       padding-left: 15px;
+          
+      }
+      input[type='text']:focus{
+          border: black;
+      }
+      button{
+          margin-top: 3%;
+          background-color: #097964;
+          width: 80px;
+          border: none;
+          height: 40px;
+          border-radius: .5em;
+          font-weight: bold;
+          margin-left: 45%;
+      }
+      button:hover{
+        color: grey;
+      }
