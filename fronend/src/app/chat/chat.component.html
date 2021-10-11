@@ -100,16 +100,24 @@
           
     
             <!-- Reciever Message-->
-            <div style="margin-top: 8%;" width="100%" class="chatter" >
-            <div class="media w-200 ml-auto mb-3"    *ngFor="let message of messageList">
-              <div *ngIf="message.type=='text'" class="media-body" [class.user]="message.user==checkUser()" [class.reciever]="message.user!=checkUser()">
+            <div style="margin-top: 8%;" width="100%"  class="chatter" >
+            <div class="media w-200 ml-auto mb-3" [class.me]="message.user==checkUser()" [class.notme]="message.user!=checkUser()"   *ngFor="let message of messageList" >
+              <!-- <div *ngIf="message.type=='text'" class="media-body" [class.user]="message.user==checkUser()" [class.reciever]="message.user!=checkUser()">
                 <div class=" rounded py-2 px-3 mb-2" [class.userMsg]="message.user==checkUser()" [class.receiverMsg]="message.user!=checkUser()" >
                   
-                  <abbr [cdkCopyToClipboard]="getCopy(message.message[0])" style="margin-left: 95%; margin-top:-10px; font-size: x-small;" id="copy" title="copy"  class="fa fa-copy" ></abbr>
+                  <abbr [cdkCopyToClipboard]="getCopy(message.message[0])" style="margin-left: 95%; margin-top:-10px; font-size: xx-small;" id="copy" title="copy"  class="fa fa-copy" ></abbr>
                   <p  class="text-small mb-0  ">{{message.message[0]}}</p>
                 </div>
                 <p class="small text-muted">{{message.message[1]}}    {{message.message[2]}}</p>
-              </div>
+              </div> -->
+              <div *ngIf="message.type=='text'" [class.me]="message.user==checkUser()" [class.notme]="message.user!=checkUser()" style="margin-right: 10px;;"  >
+                <div [class.user]="message.user==checkUser()" [class.reciever]="message.user!=checkUser()">
+                  <abbr [cdkCopyToClipboard]="getCopy(message.message[0])" style="margin-left: 95%; margin-top:-10px; margin-bottom: -50px; font-size: xx-small" id="copy" title="copy"  class="fa fa-copy" ></abbr>
+                <p  class="text-small mb-0  ">{{message.message[0]}}</p>
+                </div>
+                <p class="small text-muted">{{message.message[1]}}    {{message.message[2]}}</p>
+                </div>
+                
               <div *ngIf="message.type=='file'" [class.imguser]="message.user==checkUser()" [class.imgreciever]="message.user!=checkUser()">
               <img height="300px" style="padding: 5px; margin-left: -5px; margin: -5px;" width="280px" src="http://localhost:3000/images/message/{{message.message[0]}}">
               </div>

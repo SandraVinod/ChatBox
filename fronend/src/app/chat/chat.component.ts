@@ -99,6 +99,14 @@ export class ChatComponent implements OnInit {
        }
     })
     // 
+    this.socketService.profileUpdate().subscribe((data:any)=>{
+      var index=this.members.findIndex((x:any)=>{
+        return x.user._id===data._id;
+       })
+       console.log(index);
+       console.log(data);
+       this.members[index].user.img=data.img; 
+    })
     this.socketService.Notification().subscribe((data)=>{
       console.log(data);
       var user=sessionStorage.getItem('userid')?.slice(1,-1);
@@ -111,7 +119,7 @@ export class ChatComponent implements OnInit {
       }
     })
     this.socketService.newMessageReceived().subscribe((data:any) => {
-      console.log(data.user);
+      console.log(data);
       console.log(data.type);
      
      if(data.user!=sessionStorage.getItem('userid')){
@@ -122,8 +130,14 @@ export class ChatComponent implements OnInit {
         return x.user._id===data.user.slice(1,-1);
        })
        console.log(index);
+       if(index==-1){
+        // console.log(data);
+          index=0;
+         this.members.unshift({user:data.contact,msg:data.message});
+       }
        //console.log(data);
        this.members[index].msg=data.message; 
+       
      }
       else {
      
@@ -137,6 +151,7 @@ export class ChatComponent implements OnInit {
        this.members[index].msg=data.message;
       }
     });
+    
   }
   searchUsers(){
     this.authservise.searchUsers(this.username).subscribe((data)=>{

@@ -66,6 +66,8 @@ input::placeholder {
   width: fit-content;
   max-width: 60%;
   color: white;
+  margin-right: -50px;
+  
   
 }
 .receiverMsg{
@@ -76,17 +78,43 @@ input::placeholder {
  
 }
  .user{
-  color: #333;
-  width: 50%;
-  
-  
-}
-/*.reciever{
+  color: white;
   width: fit-content;
-    color: #999;
-   
-} */
-
+  background-color: rgb(1, 121, 105);
+  
+  border-radius: 0.5rem;
+  padding-right:15px ;
+  padding-left: 15px;
+  min-width: 50px;
+  padding-bottom: 10px;
+  max-width: 400px;
+  float: left;
+ 
+}
+.reciever{
+  color: black;
+  width: fit-content;
+  background-color: rgb(207, 202, 202);
+  border-radius: 0.5rem;
+  padding-right:15px ;
+  padding-left: 15px;
+  min-width: 50px;
+  padding-bottom: 10px;
+  max-width: 400px;
+  float: left;
+ 
+} 
+.me{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  float: right;
+}
+.notme{
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+}
 .navbar{
   position: fixed;
   background-color: honeydew;
@@ -176,8 +204,8 @@ input::placeholder {
     border: 5px solid grey;
   }
   .imguser{
-   display: flex;
-  align-self: flex-end;
+   /* display: flex;
+  align-self: flex-end; */
     max-height:300px;
     max-width: 280px;
     border: 5px solid #57a193;

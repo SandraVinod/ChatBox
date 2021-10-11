@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
   loginUser(){
     this.authservice.loginUser(this.user).subscribe((res:any)=>{
-     console.log(res);
+     console.log(res.error);
      if(res.error=='none'){
       var id=JSON.stringify(res.id);
        sessionStorage.setItem('userid',id);
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
      }
     },
     (error)=>{
-      console.log(error);
+     
       this.error=error.error;
     }
     )

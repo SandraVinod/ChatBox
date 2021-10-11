@@ -40,12 +40,24 @@ export class SocketioService {
     this.socket.emit('message', data);
   }*/
   sendMessage(data:any) {
+    console.log(data);
     this.socket.emit('message', data);
   }
  
  
   public getList(userid:any){
    this.socket.emit('getlist',userid);
+  }
+  newConv(){
+    const observable=new Observable<{contact:any,msg:any}>(observer=>{
+      this.socket.on('new conversation',(data:any)=>{
+        observer.next(data)
+      })
+      return () => {
+        this.socket.disconnect();
+      };
+    })
+    return observable;
   }
 Notification(){
   const observable=new Observable<{user:any,message:any,room:any,muted:any}>(observer=>{
@@ -80,6 +92,7 @@ checkBlocked():any{
   return observable;
 }
 newMessageReceived() {
+  
   const observable = new Observable<{ user: any, message: any}>(observer => {
     this.socket.on('new message', (data:any) => {
       observer.next(data);
@@ -110,6 +123,19 @@ return()=>{
   })
   return observable;
 }
+profileUpdate(){
+  const observable=new Observable<{data:any}>(observer=>{
+    this.socket.on('profile update',(data:any)=>{
+      observer.next(data);
+    })
+    return () => {
+      this.socket.disconnect();
+    };
+  })
+  return observable;
+ }
+  
+
  getOnline():any{
   const observable=new Observable<{users:any}>(observer=>{
     this.socket.on('get online',(users:any)=>{
