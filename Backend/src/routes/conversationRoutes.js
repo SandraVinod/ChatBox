@@ -89,22 +89,22 @@ conRouter.get('/profile/:user',(req,res)=>{
         res.send(data);
     })
 })
-conRouter.post('/editprofile',(req,res)=>{
-    var upload = multer({ storage: storage }).single('img');
-    upload(req, res, (err) => {
-        if(err){
-            console.log(err);
-        }
-        else{
-            var username=req.body.username;
-            var id=req.body.id;
-            console.log('userrr',req.file.filename);
-    userData.updateOne({_id:id},{$set: {username: username,img:req.file.filename}},(err,res)=>{
-        if(err){
-            console.log(err);
-        }
-    })
-        }
-    })
-})
+// conRouter.post('/editprofile',(req,res)=>{
+//     var upload = multer({ storage: storage }).single('img');
+//     upload(req, res, (err) => {
+//         if(err){
+//             console.log(err);
+//         }
+//         else{
+//             var username=req.body.username;
+//             var id=req.body.id;
+//             console.log('userrr',req.file.filename);
+//     userData.updateOne({_id:id},{$set: {username: username,img:req.file.filename}},(err,res)=>{
+//         if(err){
+//             console.log(err);
+//         }
+//     })
+//         }
+//     })
+//})
 module.exports=conRouter;

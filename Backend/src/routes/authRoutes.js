@@ -52,9 +52,9 @@ authRouter.post('/signup',async (req,res)=>{
                 const data = {
                     from: 'Chat Box',
                     to: user.email,
-                    subject: "Your Activation Link for YOUR APP",
-                    text: `Please use the following link within the next 10 minutes to activate your account on YOUR APP: ${baseUrl}/verification/verify-account/${user._id}/${secretCode}`,
-                    html: `<p>Please use the following link within the next 10 minutes to activate your account on YOUR APP: <strong><a href="${baseUrl}/verification/verify-account/${user._id}/${secretCode}" target="_blank">click here</a></strong></p>`,
+                    subject: "Your Activation Link for ChatBox",
+                    text: `Please use the following link within the next 10 minutes to activate your account on ChatBox: ${baseUrl}/verification/verify-account/${user._id}/${secretCode}`,
+                    html: `<p>Please use the following link within the next 10 minutes to activate your account on ChatBox: <strong><a href="${baseUrl}/verification/verify-account/${user._id}/${secretCode}" target="_blank">click here</a></strong></p>`,
                 };
                 await emailService.sendMail(data);
 
@@ -76,11 +76,11 @@ authRouter.get(
                 email: user.email,
                 code: req.params.secretCode,
             });
-
-            if (!user) {
+            console.log(user);
+            if (!response || !user) {
                 res.sendStatus(401);
             } else {
-                await userData.updateOne(
+                await userData.updateMany(
                     { email: user.email },
                     { status: "active" }
                 );
@@ -126,8 +126,8 @@ authRouter.post('/login',(req,res)=>{
                 res.status(200).send({error:'none',id:data._id,username:data.username});
             
         }
-            else{
-                res.status(401).send({error:"Please verify your email id!"});
+         else{
+                res.status(401).send("Please verify your email id!");
             }
         
     
@@ -156,9 +156,9 @@ authRouter.get('/resendmail/:email',(req,res)=>{
             const dat = {
                 from: 'Chat Box',
                 to: data.email,
-                subject: "Your Activation Link for YOUR APP",
-                text: `Please use the following link within the next 10 minutes to activate your account on YOUR APP: ${baseUrl}/verification/verify-account/${data._id}/${secretCode}`,
-                html: `<p>Please use the following link within the next 10 minutes to activate your account on YOUR APP: <strong><a href="${baseUrl}/verification/verify-account/${data._id}/${secretCode}" target="_blank">click here</a></strong></p>`,
+                subject: "Your Activation Link for ChatBox",
+                text: `Please use the following link within the next 10 minutes to activate your account on ChatBox: ${baseUrl}/verification/verify-account/${data._id}/${secretCode}`,
+                html: `<p>Please use the following link within the next 10 minutes to activate your account on ChatBox: <strong><a href="${baseUrl}/verification/verify-account/${data._id}/${secretCode}" target="_blank">click here</a></strong></p>`,
             };
             emailService.sendMail(dat);
 

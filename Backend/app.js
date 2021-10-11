@@ -38,7 +38,14 @@ var storage=multer.diskStorage({
       cb(null,file.originalname)
     }
   })
-
+  var storage2=multer.diskStorage({
+    destination:function(req,file,cb){
+      cb(null,'././public/images/profilepics')
+    },
+    filename:function(req,file,cb){
+      cb(null,file.originalname)
+    }
+  })
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
@@ -115,6 +122,26 @@ io.on('connection', (socket) => {
         }
         var newroom=msgData(item);
          newroom.save();
+        
+                      //  var contact;
+                      //  var msg;
+                      //    userData.findOne({_id:data.user}).then((dat)=>{
+                      //      contact=dat.user;
+                      //    })
+                       
+                      //      msgData.findOne({conid:data.room}).then((item)=>{
+                      //        //console.log(item.messages.pop());
+                      //         msg=item.messages.pop();
+                      //         io.to(data.sendto).emit('new conversation',{contact:contact,msg:msg})
+                              //res.send(members);
+                         //  })
+                           
+                         //  console.log(item);
+                      
+              
+         
+        
+         
       }
      
        
@@ -160,7 +187,7 @@ io.on('connection', (socket) => {
     /*console.log("hi");*/
     // emitting the 'new message' event to the clients in that room
     
-   
+   console.log('dataaa',data)
     // save the message in the 'messages' array of that chat-room
     var d=new Date();
     var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
@@ -177,7 +204,7 @@ io.on('connection', (socket) => {
     var time=d.getHours()+':'+d.getMinutes()
     //console.log(date);
     //console.log('rrrrrrr',data.room);
-    io.to(data.room).to(data.sendto).emit('new message', {user: data.user, message:[ data.message,date,time ],type:data.type,filename:data.fileName,room:data.room});
+    
     if(data.type=='file'){
       console.log('File detected!!');
       
@@ -190,12 +217,17 @@ io.on('connection', (socket) => {
     });
     var sender;
     var muted;
+    var contact;
     var datauser=data.user.slice(1,-1);
     console.log(datauser);
-    userData.findOne({_id:datauser}).then((data)=>{
-     sender=data.username;
-     
+    userData.findOne({_id:datauser}).then((dat)=>{
+     sender=dat.username;
+     contact=dat;
+     console.log('datarooom',data.room);
+     io.to(data.room).to(data.sendto).emit('new message', {user: data.user, message:[ data.message,date,time ],type:data.type,filename:data.fileName,room:data.room,contact:contact});
     })
+    console.log(contact);
+    
     msgData.findOne({conid:data.room}).then((d)=>{
       
       if(d.muted){
@@ -291,6 +323,28 @@ app.post("/messages/unblock",(req,res)=>{
             
       }
       io.to(receiver).emit('block',{blocked:false,user:user});
+  })
+})
+app.post('/conversations/editprofile',(req,res)=>{
+  var upload = multer({ storage: storage2 }).single('img');
+  upload(req, res, (err) => {
+      if(err){
+          console.log(err);
+      }
+      else{
+          var username=req.body.username;
+          var id=req.body.id;
+          console.log(id);
+          console.log('userrr',req.file.filename);
+  userData.updateOne({_id:id},{$set: {username: username,img:req.file.filename}},(err,res)=>{
+      if(err){
+          console.log(err);
+      }
+      else{
+        io.emit('profile update',{username:username,img:req.file.filename,_id:id})
+      }
+  })
+      }
   })
 })
 

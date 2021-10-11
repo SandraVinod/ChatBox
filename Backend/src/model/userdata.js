@@ -3,7 +3,10 @@ mongoose.connect('mongodb+srv://sandra:sandrasandra@ictakfiles.jdgip.mongodb.net
 const Schema=mongoose.Schema;
 const UserSchema=new Schema({
     name:String,
-    username:String,
+    username:{
+        type:String,
+        unique:true
+    },
     email:{
         type:String,
         //unique:true
@@ -12,6 +15,10 @@ const UserSchema=new Schema({
     status: {
         type: String,
         default: "pending",
+    },
+    img:{
+      type:String,
+      default:'User.png'
     }
 })
 var userdata=mongoose.model('userdata',UserSchema);
